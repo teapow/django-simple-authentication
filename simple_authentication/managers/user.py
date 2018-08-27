@@ -10,6 +10,7 @@ class UserManager(BaseUserManager):
     etc. works properly (since we use email as the only reference field,
     there is no username field).
     """
+
     def _create_user(self, email, password, is_staff, is_superuser,
                      **extra_fields):
         """
@@ -36,7 +37,7 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email=None, password=None, **extra_fields):
         """
-        Create a normal user with the specified email & password
+        Create a normal user with the specified email & password.
 
         :param email: email of the user to create
         :type email: str
@@ -55,7 +56,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, password, **extra_fields):
         """
-        Create a super user with the specified email & password
+        Create a super user with the specified email & password.
 
         :param email: email of the user to create
         :type email: str or unicode

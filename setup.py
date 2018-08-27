@@ -10,11 +10,11 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='django-simple-authentication',
     zip_safe=False,
-    version='0.1.1',
+    version='0.1.2',
     packages=find_packages(),
     include_package_data=True,
     license='MIT',
-    description='',
+    description='Email identification authentication app for Django.',
     long_description=README,
     url='https://github.com/teapow/django-simple-authentication',
     author='Thomas Power',

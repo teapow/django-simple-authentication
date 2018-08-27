@@ -79,7 +79,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def name(self):
         """ Convenience function, return a displayable name. """
         if not self.is_active:
-            return _(u'Deactivated user')
+            return _('Deactivated user')
         else:
             return str(self)
 
@@ -107,9 +107,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         """ Model save() override - ensure the email is lower-cased. """
-        if self.email:
+        if self.email:  # pragma: no branch
             self.email = self.email.lower()
-        super(User, self).save(*args, **kwargs)
+        return super(User, self).save(*args, **kwargs)
 
     def set_password(self, *args, **kwargs):
         """ Unset the force password flag. """

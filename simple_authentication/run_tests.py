@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 A standalone test runner script, configuring the minimum settings
 required for tests to execute.
@@ -6,6 +5,7 @@ required for tests to execute.
 Re-use at your own risk: many Django applications will require
 different settings and/or templates to run their tests.
 """
+
 import os
 import shutil
 import sys
@@ -32,6 +32,7 @@ SETTINGS = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(APP_DIR, 'db.sqlite3'),
+            'TEST': {},
         },
     },
     'MIDDLEWARE': (
@@ -72,7 +73,8 @@ def run():
     if hasattr(django, 'setup'):
         django.setup()
 
-    # Then, generate the necessary migrations.
+    # Then, generate the necessary migrations, since they aren't shipped as
+    # part of the package.
     from django.core.management import call_command
     call_command('makemigrations', 'simple_authentication')
 
@@ -81,7 +83,7 @@ def run():
     TestRunner = get_runner(settings)
 
     # And then we run tests and return the results.
-    test_runner = TestRunner(verbosity=1, interactive=True)
+    test_runner = TestRunner(verbosity=2, interactive=True)
     failures = test_runner.run_tests(['simple_authentication.tests'])
 
     # Cleanup.
