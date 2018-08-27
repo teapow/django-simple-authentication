@@ -33,7 +33,7 @@ Quick-start
 
 1. Install: ``pip install django-simple-authentication``.
 2. Add: ``simple_authentication`` to ``INSTALLED_APPS``.
-3. Add: ``AUTH_USER_MODEL = 'simple_authentication``.
+3. Add: ``AUTH_USER_MODEL = 'simple_authentication'``.
 4. Add: ``simple_authentication.middleware.ForcePasswordChanceMiddleware`` to
    ``MIDDLEWARE``.
 5. Make migrations: ``python manage.py makemigrations simple_authentication``.
