@@ -7,6 +7,7 @@ Re-use at your own risk: many Django applications will require
 different settings and/or templates to run their tests.
 """
 import os
+import shutil
 import sys
 
 # Make sure the app is (at least temporarily) on the import path.
@@ -71,6 +72,10 @@ def run():
     if hasattr(django, 'setup'):
         django.setup()
 
+    # Then, generate the necessary migrations.
+    from django.core.management import call_command
+    call_command('makemigrations', 'simple_authentication')
+
     # Now we instantiate a test runner...
     from django.test.utils import get_runner
     TestRunner = get_runner(settings)
@@ -78,6 +83,11 @@ def run():
     # And then we run tests and return the results.
     test_runner = TestRunner(verbosity=1, interactive=True)
     failures = test_runner.run_tests(['simple_authentication.tests'])
+
+    # Cleanup.
+    os.remove(os.path.join(APP_DIR, 'db.sqlite3'))
+    shutil.rmtree(os.path.join(APP_DIR, 'migrations'), ignore_errors=True)
+
     sys.exit(bool(failures))
 
 
