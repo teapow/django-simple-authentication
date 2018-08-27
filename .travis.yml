@@ -1,0 +1,16 @@
+language: python
+cache: pip
+sudo: false
+python:
+ - "3.6"
+install: pip install codacy-coverage coverage tox-travis
+before_script:
+  coverage erase
+script:
+  tox
+after_success:
+  coverage combine &&
+  coverage report &&
+  coverage xml -o coverage/xml/coverage.xml &&
+  coverage html --directory=coverage/html &&
+  python-codacy-coverage -r coverage/xml/coverage.xml
