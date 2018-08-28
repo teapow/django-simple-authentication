@@ -1,3 +1,5 @@
+"""Admin module containing all admin model classes."""
+
 from django.contrib import admin
 from django.contrib.auth.models import Group as _Group
 

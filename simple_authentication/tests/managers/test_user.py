@@ -1,3 +1,5 @@
+"""Tests for simple_authentication.managers.user."""
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils.timezone import now, timedelta
@@ -6,7 +8,7 @@ User = get_user_model()
 
 
 class CreateUserTestCase(TestCase):
-    """ Tests for UserManager.create_user. """
+    """Tests for UserManager.create_user."""
 
     def test_create_user_creates_regular_user(self):
         # create_user() will create a new User object using the input
@@ -131,7 +133,7 @@ class CreateUserTestCase(TestCase):
 
 
 class CreateSuperUserTestCase(TestCase):
-    """ Tests for UserManager.create_superuser. """
+    """Tests for UserManager.create_superuser."""
 
     def test_create_superuser_creates_regular_user(self):
         # create_superuser() will create a new User object using the input

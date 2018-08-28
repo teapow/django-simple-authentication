@@ -1,10 +1,11 @@
+"""Model managers used with simple_authentication.models.user."""
+
 from django.contrib.auth.models import BaseUserManager
 from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
-    """
-    Model-manager for the custom User-model in the authentication app.
+    """Model-manager for the custom User-model in the authentication app.
 
     Note: needs to be overridden in order that the createsuperuser command
     etc. works properly (since we use email as the only reference field,
@@ -13,13 +14,13 @@ class UserManager(BaseUserManager):
 
     def _create_user(self, email, password, is_staff, is_superuser,
                      **extra_fields):
-        """
-        Called to create a user object with the specified attributes.
+        """Create a user object with the specified attributes and write to DB.
+
         Used as a utility method by the two methods defined below.
         """
         now = timezone.now()
         if not email:
-            raise ValueError('The given email must be set.')
+            raise ValueError("The given email must be set.")
 
         email = self.normalize_email(email)
         user = self.model(
@@ -36,8 +37,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email=None, password=None, **extra_fields):
-        """
-        Create a normal user with the specified email & password.
+        """Create a normal user with the specified email & password.
 
         :param email: email of the user to create
         :type email: str
@@ -55,8 +55,7 @@ class UserManager(BaseUserManager):
         )
 
     def create_superuser(self, email, password, **extra_fields):
-        """
-        Create a super user with the specified email & password.
+        """Create a super user with the specified email & password.
 
         :param email: email of the user to create
         :type email: str or unicode
