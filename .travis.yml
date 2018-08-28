@@ -3,14 +3,15 @@ cache: pip
 sudo: false
 python:
  - "3.6"
-install: pip install codacy-coverage coverage tox-travis
+install: pip install codacy-coverage coverage flake8 flake8-docstrings flake8-quotes tox-travis
 before_script:
-  coverage erase
+  - coverage erase
 script:
-  tox
+  - flake8
+  - tox
 after_success:
-  coverage combine &&
-  coverage report &&
-  coverage xml -o coverage/xml/coverage.xml &&
-  coverage html --directory=coverage/html &&
-  python-codacy-coverage -r coverage/xml/coverage.xml
+  - coverage combine
+  - coverage report
+  - coverage xml -o coverage/xml/coverage.xml
+  - coverage html --directory=coverage/html
+  - python-codacy-coverage -r coverage/xml/coverage.xml
