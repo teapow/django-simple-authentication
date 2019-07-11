@@ -3,6 +3,10 @@ cache: pip
 sudo: false
 python:
  - "3.6"
+
+# pydocstyle pinned due to build error (used by flake8-docstrings). See:
+# - https://gitlab.com/pycqa/flake8-docstrings/issues/36
+# - https://github.com/PyCQA/pydocstyle/issues/375
 install: pip install \
   codacy-coverage \
   coverage \
@@ -10,6 +14,7 @@ install: pip install \
   flake8-docstrings \
   flake8-per-file-ignores \
   flake8-quotes \
+  "pydocstyle<4.0.0"
   tox-travis
 before_script:
   - coverage erase
